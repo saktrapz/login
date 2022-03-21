@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Login</title>
+    <script src="jquery-3.6.0.min.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html{
+            overflow: hidden;
+            overflow-x: hidden;
+        }
+        body{
+            font-family: 'Ubuntu', sans-serif;
+            overflow: hidden;
+            overflow-x: hidden;
+        }
+        .background{
+            width: 100%;
+            height: 960px;
+            position: relative;
+        }
+        .background img{
+            width: 100%;
+            height: 100%;
+        }
+        .form{
+            position: absolute;
+            top: 25%;
+            bottom: 35%;
+            right: 10%;
+            width: max-content;
+            height: max-content;
+            border-radius: 40px;
+            background-color: rgba(20, 20, 20, 0.521);
+            padding: 90px 40px;
+            display: none;
+        }
+        .form h1{
+            text-transform: uppercase;
+            color: white;
+            letter-spacing: 5px;
+            font-size: 40px;
+            text-align: center;
+        }
+        #username{
+            padding: 15px 0px 15px 50px;
+            font-size: 15px;
+            width: 500px;
+            outline: none;
+            border-radius: 40px;
+            border: 1px solid white;
+            color: white;
+            background-color: transparent;
+            margin: 30px 0px;
+        }
+        #password{
+            padding: 15px 0px 15px 50px;
+            font-size: 15px;
+            width: 500px;
+            outline: none;
+            border-radius: 40px;
+            border: 1px solid white;
+            color: white;
+            background-color: transparent;
+        }
+        #forget{
+            float: right;
+            margin: 30px 0px;
+            color: white;
+        }
+        #remember{
+            margin: 30px 0px;
+            color: white;
+        }
+        #check-box{
+            margin: 30px 0px;
+            width: 15px;
+            height: 15px;   
+        }
+        .fa-user{
+            color: white;
+            font-size: 20px;
+            position: absolute;
+            top: 180px;
+            left: 65px;
+        }
+        .fa-lock{
+            color: white;
+            font-size: 20px;
+            position: absolute;
+            bottom: 230px;
+            left: 65px;
+        }
+        #signin{
+            width: 500px;
+            padding: 15px;
+            border-radius: 40px;
+            border: none;
+            background-color: yellowgreen;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold   ;
+        }
+        .fa-times{
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+        }
+        .content p{
+            position: absolute;
+            top: 330px;
+            left: 50px;
+            color: rgb(93, 139, 0);
+            font-size: 70px;
+            font-weight:900;
+        }
+        .content h6{
+            position: absolute;
+            top: 410px;
+            left: 50px;
+            color: rgb(93, 139, 0);
+            font-size: 30px;
+            font-weight: 700;
+
+        }
+        .content h3{
+            position: absolute;
+            top: 310px;
+            left: 50px;
+            color: white;
+            font-size: 30px;
+        }
+        .content h5{
+            position: absolute;
+            top: 500px;
+            left: 50px;
+            color: white;
+            font-size: 15px;
+        }
+        .content h4{
+            position: absolute;
+            top: 550px;
+            left: 50px;
+            color: white;
+            font-size: 15px;
+        }
+        .content input{
+            padding: 5px 25px;
+            font-size: 15px;
+            font-weight: bold;
+            margin-left: 12px;
+            background-color: rgb(93, 139, 0);
+            color: white;
+            border-radius: 40px;
+            border: none;
+            cursor: pointer;
+        }
+        .content a{
+            margin-left: 15px;
+            color: turquoise;
+        }
+        .nav{
+            position: absolute;
+            top: 0px;
+            width: 100%;
+            height: 80px;
+            overflow: hidden;
+            display: flex;
+            justify-content:space-between;
+            align-items: center;
+            background-color: rgba(8, 8, 8, 0.815);
+        }
+        .nav .logo{
+            margin-left: 50px;
+            font-size: 25px;
+            font-weight: 800;
+            color: rgb(64, 151, 24);
+            text-decoration: none;
+            display: flex;
+            flex: 1;
+        }
+        .nav ul{
+            display: flex;
+            list-style: none;
+            flex: 0.5;
+        }
+        .nav ul li{
+            padding: 40px 40px;
+        }
+        .nav ul li a{
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 600;
+            color: rgb(99, 99, 99);
+        };
+        .active{
+            padding: 10px 30px;
+            border-radius: 40px;
+            background-color: rgb(64, 151, 24);
+        }
+        .nav ul li a:hover{
+            border-bottom: 2px solid rgb(64, 151, 24);
+            padding: 10px 0px;
+            color: #fff;
+        }
+        .mobile-nav{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            z-index: 10;
+            top: 80px;
+            display: flex;
+            justify-content:center;
+            overflow: hidden;
+            display: none;
+            right: -400px;
+        }
+        .mobile-nav ul{
+            list-style: none;
+        }
+        .mobile-nav ul li{
+            padding: 20px 170px;
+            background-color: rgb(255, 255, 255);
+            text-align: center;
+        }
+        .mobile-nav ul li a{
+            text-decoration: none;
+            color: rgb(64, 151, 24);
+            font-weight: bold;
+        }
+        
+        /* responsive */
+        @media(max-width:575px){
+            .background{
+                width: max-content;
+                height: fit-content;
+            }
+            .nav .logo{
+            margin-left: 30px;
+            font-size: 20px;
+            font-weight: 800;
+            color: rgb(64, 151, 24);
+            text-decoration: none;
+            }
+            .nav .ul{
+                display: none;
+            }
+            .fa-bars{
+                font-size: 25px;
+                margin-right: 20px;
+                color: white;
+            }
+            .content h3{
+            position: absolute;
+            top: 250px;
+            left: 30px;
+            font-size: 20px;
+            }
+            .content p{
+            position: absolute;
+            top: 280px;
+            left: 30px;
+            font-size: 40px;
+            font-weight: 800;
+            }
+            .content h6{
+            position: absolute;
+            top: 340px;
+            left: 30px;
+            font-size: 20px;
+            font-weight: 700;
+            }
+            .content h5{
+            position: absolute;
+            top: 400px;
+            left: 30px;
+            color: white;
+            font-size: 12px;
+            }
+            .content input{
+            padding: 5px 15px;
+            font-size: 12px;
+            margin-left: 2px;
+            cursor: pointer;
+            }
+            .content h4{
+            position: absolute;
+            top: 450px;
+            left: 30px;
+            font-size: 12px;
+            }
+            .form{
+                position: absolute;
+                top: 20%;
+                bottom: 35%;
+                right: 5%;
+                width: max-content;
+                height: max-content;
+                border-radius: 40px;
+                background-color: rgba(20, 20, 20, 0.932);
+                padding: 60px 40px;
+                display: none;
+            }
+            .form h1{
+                text-transform: uppercase;
+                color: white;
+                letter-spacing: 5px;
+                font-size: 25px;
+                text-align: center;
+            }
+            #username{
+                padding: 15px 0px 15px 50px;
+                font-size: 14px;
+                width: 250px;
+                outline: none;
+                border-radius: 40px;
+                border: 1px solid white;
+                color: white;
+                background-color: transparent;
+                margin: 30px 0px;
+            }
+            #password{
+                padding: 15px 0px 15px 50px;
+                font-size: 14px;
+                width: 250px;
+                outline: none;
+                border-radius: 40px;
+                border: 1px solid white;
+                color: white;
+                background-color: transparent;
+            }
+            #forget{
+                float: right;
+                margin: 30px 0px;
+                color: white;
+                font-size: 14px;
+            }
+            #remember{
+                margin: 20px 0px;
+                color: white;
+                font-size: 14px;
+            }
+            #check-box{
+                margin: 30px 0px;
+                width: 15px;
+                height: 15px;   
+            }
+            .fa-user{
+                color: white;
+                font-size: 15px;
+                position: absolute;
+                top: 135px;
+                left: 65px;
+            }
+            .fa-lock{
+                color: white;
+                font-size: 15px;
+                position: absolute;
+                bottom: 185px;
+                left: 65px;
+            }
+            #signin{
+                width: 255px;
+                padding: 10px;
+                border-radius: 40px;
+                border: none;
+                background-color: yellowgreen;
+                cursor: pointer;
+                font-size: 12px;
+                font-weight: bold   ;
+            }
+            .fa-times{
+                position: absolute;
+                top: 20px;
+                right: 30px;
+                font-size: 20px;
+                color: white;
+                cursor: pointer;
+            }
+            .mobile-nav{
+                display: flex;
+                
+            }
+            .container{
+                overflow:hidden;
+                position: relative;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="background">
+            <img src="../10.jpg" alt="">
+        </div>
+        <div class="nav">
+            <a class="logo" href="">THE NATURE</a>
+            <ul class="ul">
+                <li><a class="active" href="">Home</a></li>
+                <li><a href="">Blog</a></li>
+                <li><a href="">Infor</a></li>
+                <li><a href="">Contact</a></li>
+                <li><a href="">More</a></li>
+            </ul>
+            <i class="fa fa-bars"></i>
+            
+        </div>
+        
+        <div class="mobile-nav">
+            <ul>
+                <li><a href="">Home</a></li>
+                <li><a href="">Blog</a></li>
+                <li><a href="">Infor</a></li>
+                <li><a href="">Contact</a></li>
+                <li><a href="">More</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <h3>WELCOME TO</h3>
+            <p>THE NATURE.</p>
+            <h6>SAVE NATURE SAVE LIFE</h6>
+            <h5>Please sign in to contact with us. <input type="button" value="Sign In" id="signtop"> OR </h5>
+            <h4>Click this to Create your account<a href="#">Sign Up</a></h4>
+        </div>
+        <div class="form">
+            <i class="fa fa-times"></i>
+            <h1>Sign in</h1>
+            <i class="fa fa-user"></i>
+            <input type="text" placeholder="Username" id="username">
+            <br>
+            <i class="fa fa-lock"></i>
+            <input type="password" placeholder="Password" id="password">
+            <br>
+            <input type="checkbox" id="check-box">
+            <span id="remember">Remember me</span>
+            <span><a href="" id="forget">Forget password?</a></span>
+            <br>
+            <input type="button" value="SIGN IN" id="signin">
+        </div>
+    </div>
+
+</body>
+<script>
+    $(document).ready(function(){
+        // ArrayNav
+        // var txt= "";
+        // var list = [
+        //     {"li":"Home"},
+        //     {"li":"Blog"},
+        //     {"li":"Infor"},
+        //     {"li":"Contact"},
+        //     {"li":"More"}
+        // ];
+        // for(i in list){
+        //     txt += "<li><a href=''>"+list[i]["li"]+"</a></li>";
+        //--------------//   
+        // }
+        // document.querySelector(".ul").innerHTML = txt;
+        var form = $(".form");
+        var content = $(".content")
+        $("#signtop").click(function(){
+            // form.show(550);
+            // content.hide(550);
+            form.slideToggle(300);
+        });
+        $(".fa-times").click(function(){
+            form.slideUp(300);
+            content.show(550);
+        });
+        // Login Acoount
+
+        var username = $("#username");
+        var password = $("#password");
+        $("#signin").click(function(){
+            if(username.val() == "" && password.val() == ""){
+                alert("Please Input");
+            }else{
+                if(username.val() == "rithysak"){
+                    if(password.val() == "123456"){
+                        alert("Correct All")
+                    }else{
+                        alert("Incorrect Password")
+                    }
+                }else{
+                    alert("Incorrect username");
+                }
+            }
+        });
+
+        //
+        var i=1;
+        $(".fa-bars").click(function(){
+            // $(".mobile-nav").slideToggle(800);
+            
+            if(i == 1){
+                $(".mobile-nav").css({right: '0px',"transition":"0.5s"});
+                i=0;
+            }else{
+                $(".mobile-nav").css({right: '-400px',"transition":"0.5s"});
+                i=1;
+            }
+                // $(".background").css({"filter":"blur(4px)"});
+        });
+
+    
+    });
+</script>
+</html>
